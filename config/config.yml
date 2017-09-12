@@ -40,8 +40,10 @@ android:
 ios:
   enabled: false
   key_path: "key.pem"
+  key_path: "key_dev.pem"
   password: "" # certificate password, default as empty string.
   production: false
+  development: false
   max_retry: 0 # resend fail notification, default value zero is disabled
 
 log:

@@ -62,11 +62,13 @@ type SectionAndroid struct {
 
 // SectionIos is sub section of config.
 type SectionIos struct {
-	Enabled    bool   `yaml:"enabled"`
-	KeyPath    string `yaml:"key_path"`
-	Password   string `yaml:"password"`
-	Production bool   `yaml:"production"`
-	MaxRetry   int    `yaml:"max_retry"`
+	Enabled     bool   `yaml:"enabled"`
+	KeyPath     string `yaml:"key_path"`
+	DevKeyPath  string `yaml:"dev_key_path"`
+	Password    string `yaml:"password"`
+	Production  bool   `yaml:"production"`
+	Development bool   `yaml:"development"`
+	MaxRetry    int    `yaml:"max_retry"`
 }
 
 // SectionLog is sub section of config.

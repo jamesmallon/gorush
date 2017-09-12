@@ -3,8 +3,8 @@ package gorush
 import (
 	"crypto/tls"
 
-	"github.com/appleboy/gorush/config"
-	"github.com/appleboy/gorush/storage"
+	"github.com/axiomzen/gorush/config"
+	"github.com/axiomzen/gorush/storage"
 
 	"github.com/appleboy/go-fcm"
 	apns "github.com/sideshow/apns2"
@@ -18,8 +18,12 @@ var (
 	QueueNotification chan PushNotification
 	// CertificatePemIos is ios certificate file
 	CertificatePemIos tls.Certificate
-	// ApnsClient is apns client
+	// DevCertificatePemIos is ios certificate file
+	DevCertificatePemIos tls.Certificate
+	// ApnsClient is a slice of apns client
 	ApnsClient *apns.Client
+	// DevApnsClient is a slice of apns client
+	DevApnsClient *apns.Client
 	// FCMClient is apns client
 	FCMClient *fcm.Client
 	// LogAccess is log server request log

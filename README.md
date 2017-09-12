@@ -2,14 +2,14 @@
 
 A push notification micro server using [Gin](https://github.com/gin-gonic/gin) framework written in Go (Golang).
 
-[![GoDoc](https://godoc.org/github.com/appleboy/gorush?status.svg)](https://godoc.org/github.com/appleboy/gorush)
-[![Build Status](http://drone.wu-boy.com/api/badges/appleboy/gorush/status.svg)](http://drone.wu-boy.com/appleboy/gorush)
-[![codecov](https://codecov.io/gh/appleboy/gorush/branch/master/graph/badge.svg)](https://codecov.io/gh/appleboy/gorush)
-[![Go Report Card](https://goreportcard.com/badge/github.com/appleboy/gorush)](https://goreportcard.com/report/github.com/appleboy/gorush)
+[![GoDoc](https://godoc.org/github.com/axiomzen/gorush?status.svg)](https://godoc.org/github.com/axiomzen/gorush)
+[![Build Status](http://drone.wu-boy.com/api/badges/axiomzen/gorush/status.svg)](http://drone.wu-boy.com/axiomzen/gorush)
+[![codecov](https://codecov.io/gh/axiomzen/gorush/branch/master/graph/badge.svg)](https://codecov.io/gh/axiomzen/gorush)
+[![Go Report Card](https://goreportcard.com/badge/github.com/axiomzen/gorush)](https://goreportcard.com/report/github.com/axiomzen/gorush)
 [![codebeat badge](https://codebeat.co/badges/0a4eff2d-c9ac-46ed-8fd7-b59942983390)](https://codebeat.co/projects/github-com-appleboy-gorush)
-[![Docker Pulls](https://img.shields.io/docker/pulls/appleboy/gorush.svg)](https://hub.docker.com/r/appleboy/gorush/)
-[![](https://images.microbadger.com/badges/image/appleboy/gorush.svg)](https://microbadger.com/images/appleboy/gorush "Get your own image badge on microbadger.com")
-[![Release](https://github-release-version.herokuapp.com/github/appleboy/gorush/release.svg?style=flat)](https://github.com/appleboy/gorush/releases/latest)
+[![Docker Pulls](https://img.shields.io/docker/pulls/axiomzen/gorush.svg)](https://hub.docker.com/r/axiomzen/gorush/)
+[![](https://images.microbadger.com/badges/image/axiomzen/gorush.svg)](https://microbadger.com/images/axiomzen/gorush "Get your own image badge on microbadger.com")
+[![Release](https://github-release-version.herokuapp.com/github/axiomzen/gorush/release.svg?style=flat)](https://github.com/axiomzen/gorush/releases/latest)
 
 ## Contents
 
@@ -45,7 +45,7 @@ A push notification micro server using [Gin](https://github.com/gin-gonic/gin) f
 
 ## Features
 
-* Support [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging) using [go-fcm](https://github.com/appleboy/go-fcm) library for Android.
+* Support [Firebase Cloud Messaging](https://firebase.google.com/docs/cloud-messaging) using [go-fcm](https://github.com/axiomzen/go-fcm) library for Android.
 * Support [HTTP/2](https://http2.github.io/) Apple Push Notification Service using [apns2](https://github.com/sideshow/apns2) library.
 * Support [YAML](https://github.com/go-yaml/yaml) configuration.
 * Support command line to send single Android or iOS notification.
@@ -155,30 +155,30 @@ How to send push notification using `gorush` command? (Android or iOS)
 
 ### Download a binary
 
-The pre-compiled binaries can be downloaded from [release page](https://github.com/appleboy/gorush/releases).
+The pre-compiled binaries can be downloaded from [release page](https://github.com/axiomzen/gorush/releases).
 
 With `Go` installed
 
 ```
-$ go get -u -v github.com/appleboy/gorush
+$ go get -u -v github.com/axiomzen/gorush
 ```
 
 On linux
 
 ```sh
-$ wget https://github.com/appleboy/gorush/releases/download/v1.9.0/gorush-v1.9.0-linux-amd64 -O gorush
+$ wget https://github.com/axiomzen/gorush/releases/download/v1.9.0/gorush-v1.9.0-linux-amd64 -O gorush
 ```
 
 On OS X
 
 ```sh
-$ wget https://github.com/appleboy/gorush/releases/download/v1.9.0/gorush-v1.9.0-darwin-amd64 -O gorush
+$ wget https://github.com/axiomzen/gorush/releases/download/v1.9.0/gorush-v1.9.0-darwin-amd64 -O gorush
 ```
 
 On Windows
 
 ```sh
-$ wget https://github.com/appleboy/gorush/releases/download/v1.9.0/gorush-v1.9.0-windows-amd64.exe -O gorush.exe
+$ wget https://github.com/axiomzen/gorush/releases/download/v1.9.0/gorush-v1.9.0-windows-amd64.exe -O gorush.exe
 ```
 
 ### Command Usage
@@ -669,7 +669,7 @@ package main
 import (
 	"log"
 
-	pb "github.com/appleboy/gorush/rpc/proto"
+	pb "github.com/axiomzen/gorush/rpc/proto"
 	"golang.org/x/net/context"
 	"google.golang.org/grpc"
 )
@@ -727,7 +727,7 @@ main();
 
 ## Run gorush in Docker
 
-Set up `gorush` in the cloud in under 5 minutes with zero knowledge of Golang or Linux shell using our [gorush Docker image](https://hub.docker.com/r/appleboy/gorush/).
+Set up `gorush` in the cloud in under 5 minutes with zero knowledge of Golang or Linux shell using our [gorush Docker image](https://hub.docker.com/r/axiomzen/gorush/).
 
 ```bash
 $ docker pull appleboy/gorush
