@@ -3,13 +3,6 @@
 A push notification micro server using [Gin](https://github.com/gin-gonic/gin) framework written in Go (Golang).
 
 [![GoDoc](https://godoc.org/github.com/axiomzen/gorush?status.svg)](https://godoc.org/github.com/axiomzen/gorush)
-[![Build Status](http://drone.wu-boy.com/api/badges/axiomzen/gorush/status.svg)](http://drone.wu-boy.com/axiomzen/gorush)
-[![codecov](https://codecov.io/gh/axiomzen/gorush/branch/master/graph/badge.svg)](https://codecov.io/gh/axiomzen/gorush)
-[![Go Report Card](https://goreportcard.com/badge/github.com/axiomzen/gorush)](https://goreportcard.com/report/github.com/axiomzen/gorush)
-[![codebeat badge](https://codebeat.co/badges/0a4eff2d-c9ac-46ed-8fd7-b59942983390)](https://codebeat.co/projects/github-com-appleboy-gorush)
-[![Docker Pulls](https://img.shields.io/docker/pulls/axiomzen/gorush.svg)](https://hub.docker.com/r/axiomzen/gorush/)
-[![](https://images.microbadger.com/badges/image/axiomzen/gorush.svg)](https://microbadger.com/images/axiomzen/gorush "Get your own image badge on microbadger.com")
-[![Release](https://github-release-version.herokuapp.com/github/axiomzen/gorush/release.svg?style=flat)](https://github.com/axiomzen/gorush/releases/latest)
 
 ## Contents
 
