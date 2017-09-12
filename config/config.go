@@ -168,6 +168,7 @@ func BuildDefaultPushConf() ConfYaml {
 	conf.Ios.KeyPath = "key.pem"
 	conf.Ios.Password = ""
 	conf.Ios.Production = false
+	conf.Ios.Development = false
 	conf.Ios.MaxRetry = 0
 
 	// log

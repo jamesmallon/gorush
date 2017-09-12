@@ -13,6 +13,9 @@ import (
 // InitAPNSClient use for initialize APNs Client.
 func InitAPNSClient() error {
 	if PushConf.Ios.Enabled {
+		if !PushConf.Ios.Production && !PushConf.Ios.Development {
+			return errors.New("iOS Push notifications enabled, but neither production nor development servers selected")
+		}
 		if PushConf.Ios.Production {
 			var err error
 			ext := filepath.Ext(PushConf.Ios.KeyPath)
@@ -198,8 +201,12 @@ Retry:
 	for _, token := range req.Tokens {
 		notification.DeviceToken = token
 		// send ios notification
-		res, err := DevApnsClient.Push(notification)
-		if err != nil || res.StatusCode != 200 {
+		var err error
+		var res *apns.Response
+		if PushConf.Ios.Development {
+			res, err = DevApnsClient.Push(notification)
+		}
+		if (err != nil || res.StatusCode != 200) && PushConf.Ios.Production {
 			// Try Production second, so that if it errors out, these are the ones shown
 			res, err = ApnsClient.Push(notification)
 		}
