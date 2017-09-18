@@ -21,7 +21,7 @@ Build() {
     :
 }
 Test() {
-    go test -race $(go list ./... | grep -v /vendor/ | grep -v /test/integration)
+    go test $(go list ./... | grep -v /vendor/ | grep -v /storage)
 }
 
 Version() {
