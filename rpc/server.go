@@ -23,20 +23,21 @@ func (s *server) Send(ctx context.Context, in *pb.NotificationRequest) (*pb.Noti
 
 	badgeValue := int(in.Badge)
 
-	dataMap := make(gorush.D)
+	payload := make(gorush.D)
 	for key, value := range in.Data {
-		dataMap[key] = value
+		payload[key] = value
 	}
 
 	notification := gorush.PushNotification{
-		Platform: int(in.Platform),
-		Tokens:   in.Tokens,
-		Message:  in.Message,
-		Title:    in.Title,
-		Topic:    in.Topic,
-		APIKey:   in.Key,
-		Badge:    &badgeValue,
-		Data:     dataMap,
+		Platform:         int(in.Platform),
+		Tokens:           in.Tokens,
+		Message:          in.Message,
+		Title:            in.Title,
+		Topic:            in.Topic,
+		APIKey:           in.Key,
+		Badge:            &badgeValue,
+		Data:             payload,
+		ContentAvailable: true,
 	}
 
 	go gorush.SendNotification(notification)
