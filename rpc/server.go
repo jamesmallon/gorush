@@ -20,7 +20,14 @@ type server struct{}
 
 // Send implements helloworld.GreeterServer
 func (s *server) Send(ctx context.Context, in *pb.NotificationRequest) (*pb.NotificationReply, error) {
+
 	badgeValue := int(in.Badge)
+
+	dataMap := make(gorush.D)
+	for key, value := range in.Data {
+		dataMap[key] = value
+	}
+
 	notification := gorush.PushNotification{
 		Platform: int(in.Platform),
 		Tokens:   in.Tokens,
@@ -29,6 +36,7 @@ func (s *server) Send(ctx context.Context, in *pb.NotificationRequest) (*pb.Noti
 		Topic:    in.Topic,
 		APIKey:   in.Key,
 		Badge:    &badgeValue,
+		Data:     dataMap,
 	}
 
 	go gorush.SendNotification(notification)

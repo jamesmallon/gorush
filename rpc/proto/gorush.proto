@@ -10,6 +10,7 @@ message NotificationRequest {
   string topic = 5;
   string key = 6;
   int32 badge = 7;
+  map<string, string> data = 8;
 }
 
 message NotificationReply {
