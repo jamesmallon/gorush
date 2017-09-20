@@ -37,7 +37,7 @@ func (s *server) Send(ctx context.Context, in *pb.NotificationRequest) (*pb.Noti
 		APIKey:           in.Key,
 		Badge:            &badgeValue,
 		Data:             payload,
-		ContentAvailable: true,
+		ContentAvailable: in.ContentAvailable,
 	}
 
 	go gorush.SendNotification(notification)
