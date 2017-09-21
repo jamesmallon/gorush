@@ -25,7 +25,7 @@ Test() {
 }
 
 Version() {
-    git describe --tag 2> /dev/null
+	git log -n 1 --pretty=format:%h -- .
 }
 
 PreBundle() {
