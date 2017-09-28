@@ -2,17 +2,33 @@ package gorush
 
 import (
 	"errors"
+	"fmt"
 	"path/filepath"
 	"time"
 
 	apns "github.com/sideshow/apns2"
 	"github.com/sideshow/apns2/certificate"
 	"github.com/sideshow/apns2/payload"
+	"github.com/sideshow/apns2/token"
 )
 
 // InitAPNSClient use for initialize APNs Client.
 func InitAPNSClient() error {
 	if PushConf.Ios.Enabled {
+
+		if PushConf.Ios.P8Key != "" {
+			p8key := fmt.Sprintf("-----BEGIN PRIVATE KEY-----\n%s\n-----END PRIVATE KEY-----", PushConf.Ios.P8Key)
+			authKey := token.AuthKeyFromBytes([]byte(p8key))
+			token := &token.Token{
+				AuthKey: authKey,
+				// KeyID from developer account (Certificates, Identifiers & Profiles -> Keys)
+				KeyID: PushConf.Ios.KeyID,
+				// TeamID from developer account (View Account -> Membership)
+				TeamID: PushConf.Ios.TeamID,
+			}
+			ApnsClient = apns2.NewTokenClient(token)
+			return nil
+		}
 		var err error
 		ext := filepath.Ext(PushConf.Ios.KeyPath)
 

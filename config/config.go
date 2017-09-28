@@ -68,6 +68,9 @@ type SectionIos struct {
 	Password   string `yaml:"password"`
 	Production bool   `yaml:"production"`
 	MaxRetry   int    `yaml:"max_retry"`
+	P8Key      string `yaml:"p8_key"`
+	KeyID      string `yaml:"key_id"`
+	TeamID     string `yaml:"team_id"`
 }
 
 // SectionLog is sub section of config.
@@ -168,6 +171,9 @@ func BuildDefaultPushConf() ConfYaml {
 	conf.Ios.Password = ""
 	conf.Ios.Production = false
 	conf.Ios.MaxRetry = 0
+	conf.Ios.P8Key = ""
+	conf.Ios.KeyID = "ABC123DEFG"
+	conf.Ios.TeamID = "DEF123GHIJ"
 
 	// log
 	conf.Log.Format = "string"

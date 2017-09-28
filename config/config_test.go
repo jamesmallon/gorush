@@ -106,6 +106,9 @@ func (suite *ConfigTestSuite) TestValidateConfDefault() {
 	assert.Equal(suite.T(), "", suite.ConfGorushDefault.Ios.Password)
 	assert.Equal(suite.T(), false, suite.ConfGorushDefault.Ios.Production)
 	assert.Equal(suite.T(), 0, suite.ConfGorushDefault.Ios.MaxRetry)
+	assert.Equal(suite.T(), "", suite.ConfGorushDefault.Ios.P8Key)
+	assert.Equal(suite.T(), "ABC123DEFG", suite.ConfGorushDefault.Ios.KeyID)
+	assert.Equal(suite.T(), "DEF123GHIJ", suite.ConfGorushDefault.Ios.TeamID)
 
 	// log
 	assert.Equal(suite.T(), "string", suite.ConfGorushDefault.Log.Format)
