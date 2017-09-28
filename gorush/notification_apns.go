@@ -18,7 +18,11 @@ func InitAPNSClient() error {
 
 		if PushConf.Ios.P8Key != "" {
 			p8key := fmt.Sprintf("-----BEGIN PRIVATE KEY-----\n%s\n-----END PRIVATE KEY-----", PushConf.Ios.P8Key)
-			authKey := token.AuthKeyFromBytes([]byte(p8key))
+			authKey, err := token.AuthKeyFromBytes([]byte(p8key))
+			if err != nil {
+				LogError.Error("P8 Error:", err.Error())
+				return err
+			}
 			token := &token.Token{
 				AuthKey: authKey,
 				// KeyID from developer account (Certificates, Identifiers & Profiles -> Keys)
@@ -26,7 +30,7 @@ func InitAPNSClient() error {
 				// TeamID from developer account (View Account -> Membership)
 				TeamID: PushConf.Ios.TeamID,
 			}
-			ApnsClient = apns2.NewTokenClient(token)
+			ApnsClient = apns.NewTokenClient(token)
 			return nil
 		}
 		var err error
