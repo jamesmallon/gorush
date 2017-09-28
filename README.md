@@ -751,40 +751,49 @@ $ http -v --verify=no --json GET http://your.docker.host/api/stat/go
 
 ## Run gorush in Kubernetes
 
-Please make sure you are install [Minikube](https://kubernetes.io/docs/tutorials/stateless-application/hello-minikube/) first.
-
-### Create a Minikube cluster
-
-```sh
-$ minikube start --vm-driver=xhyve
-```
-
 ### Quick Start
 
-Start the gorush with one command:
+Create name space `gorush`:
 
 ```sh
-$ kubectl create -f k8s
-deployment "frontend" created
-service "frontend" created
-deployment "redis-master" created
-service "redis-master" created
+$ kubectl create -f k8s/gorush-namespace.yaml
 ```
 
-Then, list all your Services:
+Create redis service:
 
 ```sh
-$ kubectl get services
-NAME           CLUSTER-IP   EXTERNAL-IP   PORT(S)          AGE
-frontend       10.0.0.156   <pending>     8088:32517/TCP   30s
-kubernetes     10.0.0.1     <none>        443/TCP          14d
-redis-master   10.0.0.67    <none>        6379/TCP         30s
+$ kubectl create -f k8s/gorush-redis-deployment.yaml
+$ kubectl create -f k8s/gorush-redis-service.yaml
 ```
 
-### view the gorush home page
+Create gorush deployment controller provides declarative updates for Pods and ReplicaSets:
 
 ```sh
-$ minikube service frontend
+$ kubectl create -f k8s/gorush-deployment.yaml
+```
+
+### Create the Service Controller for AWS ELB
+
+```sh
+$ kubectl create -f k8s/gorush-service.yaml
+```
+
+### Ingress Controller for AWS ALB
+
+Update the following in `k8s/gorush-service.yaml`
+
+```diff
+-  type: LoadBalancer
+-  # type: NodePort
++  # type: LoadBalancer
++  type: NodePort
+```
+
+Then start the AWS ALB by the follwong command.
+
+```
+$ kubectl create -f k8s/gorush-service.yaml
+$ kubectl create -f k8s/gorush-aws-alb-ingress.yaml
 ```
 
 ### Clean up the gorush:
@@ -795,6 +804,6 @@ $ kubectl delete -f k8s
 
 ## License
 
-Copyright 2016 Bo-Yi Wu [@appleboy](https://twitter.com/appleboy).
+Copyright 2017 Bo-Yi Wu [@appleboy](https://twitter.com/appleboy).
 
 Licensed under the MIT License.
