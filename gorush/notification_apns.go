@@ -41,6 +41,21 @@ func InitAPNSClient() error {
 			CertificatePemIos, err = certificate.FromP12File(PushConf.Ios.KeyPath, PushConf.Ios.Password)
 		case ".pem":
 			CertificatePemIos, err = certificate.FromPemFile(PushConf.Ios.KeyPath, PushConf.Ios.Password)
+		case ".p8":
+			authKey, err := token.AuthKeyFromFile(PushConf.Ios.KeyPath)
+			if err != nil {
+				LogError.Error("P8 Error:", err.Error())
+				return err
+			}
+			token := &token.Token{
+				AuthKey: authKey,
+				// KeyID from developer account (Certificates, Identifiers & Profiles -> Keys)
+				KeyID: PushConf.Ios.KeyID,
+				// TeamID from developer account (View Account -> Membership)
+				TeamID: PushConf.Ios.TeamID,
+			}
+			ApnsClient = apns.NewTokenClient(token)
+			return nil
 		default:
 			err = errors.New("wrong certificate key extension")
 		}
