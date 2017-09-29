@@ -2,17 +2,37 @@ package gorush
 
 import (
 	"errors"
+	"fmt"
 	"path/filepath"
 	"time"
 
 	apns "github.com/sideshow/apns2"
 	"github.com/sideshow/apns2/certificate"
 	"github.com/sideshow/apns2/payload"
+	"github.com/sideshow/apns2/token"
 )
 
 // InitAPNSClient use for initialize APNs Client.
 func InitAPNSClient() error {
 	if PushConf.Ios.Enabled {
+
+		if PushConf.Ios.P8Key != "" {
+			p8key := fmt.Sprintf("-----BEGIN PRIVATE KEY-----\n%s\n-----END PRIVATE KEY-----", PushConf.Ios.P8Key)
+			authKey, err := token.AuthKeyFromBytes([]byte(p8key))
+			if err != nil {
+				LogError.Error("P8 Error:", err.Error())
+				return err
+			}
+			token := &token.Token{
+				AuthKey: authKey,
+				// KeyID from developer account (Certificates, Identifiers & Profiles -> Keys)
+				KeyID: PushConf.Ios.KeyID,
+				// TeamID from developer account (View Account -> Membership)
+				TeamID: PushConf.Ios.TeamID,
+			}
+			ApnsClient = apns.NewTokenClient(token)
+			return nil
+		}
 		var err error
 		ext := filepath.Ext(PushConf.Ios.KeyPath)
 
@@ -21,6 +41,21 @@ func InitAPNSClient() error {
 			CertificatePemIos, err = certificate.FromP12File(PushConf.Ios.KeyPath, PushConf.Ios.Password)
 		case ".pem":
 			CertificatePemIos, err = certificate.FromPemFile(PushConf.Ios.KeyPath, PushConf.Ios.Password)
+		case ".p8":
+			authKey, err := token.AuthKeyFromFile(PushConf.Ios.KeyPath)
+			if err != nil {
+				LogError.Error("P8 Error:", err.Error())
+				return err
+			}
+			token := &token.Token{
+				AuthKey: authKey,
+				// KeyID from developer account (Certificates, Identifiers & Profiles -> Keys)
+				KeyID: PushConf.Ios.KeyID,
+				// TeamID from developer account (View Account -> Membership)
+				TeamID: PushConf.Ios.TeamID,
+			}
+			ApnsClient = apns.NewTokenClient(token)
+			return nil
 		default:
 			err = errors.New("wrong certificate key extension")
 		}

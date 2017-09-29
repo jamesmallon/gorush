@@ -43,6 +43,9 @@ ios:
   password: "" # certificate password, default as empty string.
   production: false
   max_retry: 0 # resend fail notification, default value zero is disabled
+  p8_key: "" # empty string here means ignore
+  key_id: "ABC123DEFG"
+  team_id: "DEF123GHIJ"
 
 log:
   format: "string" # string or json
