@@ -1,0 +1,8 @@
+FROM plugins/base:multiarch
+
+ADD config/config.yml /
+ADD bin/gorush /
+
+EXPOSE 8088
+ENTRYPOINT ["/gorush"]
+CMD ["-c", "config.yml"]

@@ -1,0 +1,36 @@
+DOCKER_FILE=Dockerfile.az
+BUILD_CONTAINER=golang:1.9
+TEST_CONTAINER=
+REPO=axiomzen
+SERVICE_NAME=gorush
+IMAGE_SERVER=
+VERSION=0.0.1
+MOUNT_DIR=/go/src/github.com/axiomzen
+CACHE_DIR_SRC=
+CACHE_DIR_DST=
+
+PreBuild() {
+    :
+}
+
+PostBuild() {
+    :
+}
+Build() {
+    CGO_ENABLED=0 go build -v -o bin/gorush
+    :
+}
+Test() {
+    go test $(go list ./... | grep -v /vendor/ | grep -v /storage)
+}
+
+Version() {
+	git log -n 1 --pretty=format:%h -- .
+}
+
+PreBundle() {
+    :
+}
+PostBundle() {
+    :
+}
