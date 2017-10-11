@@ -157,7 +157,7 @@ func CheckPushConf() error {
 		return errors.New("Please enable iOS or Android config in yml config")
 	}
 
-	if PushConf.Ios.Enabled {
+	if PushConf.Ios.Enabled && PushConf.Ios.P8Key == "" {
 		if PushConf.Ios.KeyPath == "" {
 			return errors.New("Missing iOS certificate path")
 		}
