@@ -68,3 +68,9 @@ func queueNotification(req RequestPush) (int, []LogPushEntry) {
 
 	return count, log
 }
+
+// QueueNotificationRequest simply calls a private function
+// do not want to change name of private function for fork compatibility
+func QueueNotificationRequest(req RequestPush) (int, []LogPushEntry) {
+	return queueNotification(req)
+}
