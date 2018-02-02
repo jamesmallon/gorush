@@ -40,11 +40,13 @@ func (s *server) Send(ctx context.Context, in *pb.NotificationRequest) (*pb.Noti
 		ContentAvailable: in.ContentAvailable,
 	}
 
-	go gorush.SendNotification(notification)
+	count, logs := gorush.QueueNotificationRequest(gorush.RequestPush{
+		Notifications: []gorush.PushNotification{notification},
+	})
 
 	return &pb.NotificationReply{
-		Success: false,
-		Counts:  int32(len(notification.Tokens)),
+		Success: len(logs) == 0,
+		Counts:  int32(count),
 	}, nil
 }
 

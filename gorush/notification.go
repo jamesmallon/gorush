@@ -103,6 +103,16 @@ func (p *PushNotification) AddLog(log LogPushEntry) {
 	}
 }
 
+// SetLog
+func (p *PushNotification) SetLog(log *[]LogPushEntry) {
+	p.log = log
+}
+
+// SetWaitGroup
+func (p *PushNotification) SetWaitGroup(wg *sync.WaitGroup) {
+	p.wg = wg
+}
+
 // CheckMessage for check request message
 func CheckMessage(req PushNotification) error {
 	var msg string
